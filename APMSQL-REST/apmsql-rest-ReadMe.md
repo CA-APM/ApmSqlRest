@@ -1,4 +1,4 @@
-# jdbc-sql-rest
+#ApmSqlRest
 	A HTTP/REST wrapper service for APMSQL/JDBC.
 
 	APMSQL provides ODBC & JDBC interfaces to CA APM. Tis service wraps the JDBC interface in the sense that
