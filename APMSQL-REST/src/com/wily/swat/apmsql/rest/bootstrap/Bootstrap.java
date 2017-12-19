@@ -18,8 +18,8 @@ public class Bootstrap
 
         try
           {
-        component.getServers().add(startHttpServer(component, Config.getIntProperty("httpport")));
-        component.start();
+        	component.getServers().add(startHttpServer(component, Config.getIntProperty("httpport")));
+        	component.start();
           }
         catch (Exception e)
           { 

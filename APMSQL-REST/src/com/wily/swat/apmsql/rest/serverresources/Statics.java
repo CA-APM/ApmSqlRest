@@ -25,14 +25,14 @@ public class Statics
 	
 	private final static String testQuery2= "{\"query\": \"SELECT distinct agent_name, metric_path, agg_value FROM  numerical_metric_data WHERE ts BETWEEN {ts '2017-12-12 10:50:00.0'} AND {ts '2017-12-12 11:00:00.0'} AND metric_path LIKE '%GC%Bytes In Use' and agent_name not like '%(Virtual)%' ORDER BY metric_path ASC\" }";
 	
-	 public static Representation ProcessJSON(Representation entity, JSONTransformerIface transformer ) throws IOException 
+	 public static Representation ProcessJSON(Representation entity, JSONTransformerIface transformer ) 
 	    {
-	      JsonRepresentation jsonRepresentation= new JsonRepresentation(entity);
-	       if (jsonRepresentation.getAvailableSize()<0)
-	    	 return Statics.errorRepresentation("No JSON supplied in request body"); 
-	      
-	      try
+		  try
 	        {
+		      JsonRepresentation jsonRepresentation= new JsonRepresentation(entity);
+		       if (jsonRepresentation.getAvailableSize()<0)
+		    	 return Statics.errorRepresentation("No JSON supplied in request body"); 
+	      
 		      JSONObject jsonObject = jsonRepresentation.getJsonObject();   
 		      
 		      try
@@ -47,9 +47,11 @@ public class Statics
 	        }
 	      catch (JSONException je)
 	        { return Statics.errorRepresentation("Error in JSON query: " + je.getMessage()); }
+	      catch (IOException ioe)
+	        { return Statics.errorRepresentation("IOError in executing query: " + ioe.getMessage()); }
 	    }
 	
-    protected static List<JSONObject> executeQuery(String sql) throws JSONException
+    protected static List<JSONObject> executeQuery(String sql) throws JSONException, IOException
       {
 	  	List<JSONObject> list = JDBC.execute(sql, resultSet -> 
 	  	  {
@@ -109,8 +111,9 @@ public class Statics
 	  	} 
 	  catch (JSONException e) 
 	  	{
-		  // TODO Auto-generated catch block
 		  e.printStackTrace();
 		}
+	  catch (IOException ioe)
+	    { ioe.printStackTrace(); }
     }
   }

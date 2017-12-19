@@ -6,6 +6,8 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 
 import com.wily.swat.apmsql.rest.config.Config;
 
+import java.io.IOException;
+
 import javax.sql.DataSource;
 
 public class JDBC 
@@ -14,7 +16,7 @@ public class JDBC
 	
 	private static JdbcTemplate jdbcTemplate;
 
-    public static <T> T execute(String sql, ResultSetExtractor<T> extractor) 
+    public static <T> T execute(String sql, ResultSetExtractor<T> extractor) throws IOException 
       {
         if(jdbcTemplate == null) 
           jdbcTemplate = init();
@@ -22,10 +24,10 @@ public class JDBC
         return jdbcTemplate.query(sql, extractor);
       } 
 
-    private static JdbcTemplate init() 
+    private static JdbcTemplate init() throws IOException 
      { return new JdbcTemplate(getDs()); }
 
-    private static DataSource getDs()
+    private static DataSource getDs() throws IOException 
       {
         String url = Config.getProperty("jdbcurl");
         String user = Config.getProperty("jdbcuser");

@@ -14,29 +14,33 @@ public class Config {
     
 
     //Load static properties from the properties file
-    private static void load() {
+    private static void load() throws IOException {
         try 
           {
         	File file = new File(ConfigFile);
         	InputStream inputStream;
         	
         	if(file.exists() && !file.isDirectory()) 
-        	  inputStream = new FileInputStream(file);
+        	  {        		
+        	    inputStream = new FileInputStream(file);
+        	
+
+        	    properties = new Properties();
+        	    properties.load(inputStream);
+
+        	    inputStream.close();
+        	  }
         	else
-        	  // Use config inside the jar-file.
-        	  inputStream = Config.class.getResourceAsStream("/apmsql-rest.config"); 
-
-            properties = new Properties();
-            properties.load(inputStream);
-
-            inputStream.close();
+        	  throw new IOException(ConfigFile + " not found in current directory");
           } 
         catch(IOException ioe) 
-          { ioe.printStackTrace(); }
+          { 
+        	throw ioe;
+          }
     }
 
     //Go get the property we want
-    public static String getProperty(String property) 
+    public static String getProperty(String property) throws IOException 
       {
         if(properties == null)
           load();
@@ -44,7 +48,7 @@ public class Config {
         return(properties.getProperty(property));
     }
     
-    public static int getIntProperty(String property) 
+    public static int getIntProperty(String property) throws IOException 
     {
       if(properties == null)
         load();

@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ca.apm.swat</groupId>
 	<artifactId>APMSQL-REST</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<packaging>jar</packaging>
 	<name>APMSQL-JDBC_REST</name>
 	
@@ -25,11 +25,6 @@
 	</properties>
 
     <dependencies>
-        <dependency>
-    		<groupId>org.jboss.teiid</groupId>
-    		<artifactId>teiid-client</artifactId>
-    		<version>9.0.1</version>
-			</dependency>
         <dependency>
             <groupId>org.restlet.jse</groupId>
             <artifactId>org.restlet</artifactId>
@@ -89,6 +84,11 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.teiid</groupId>
+    		<artifactId>teiid-client</artifactId>
+    		<version>9.0.1</version>
         </dependency>
     </dependencies>
 

@@ -68,3 +68,9 @@
 			...
 			}]
 
+#Error result
+
+	Any error will result in a JSON response body with 'success= false' and a message 	object describing the error:
+	
+	{"success":false,"message":"Error in JSON query: Minutes value must not exceed 30"}
+	
