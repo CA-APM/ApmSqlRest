@@ -3,6 +3,7 @@ package com.wily.swat.apmsql.rest.jdbc;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.teiid.jdbc.TeiidDriver;
 
 import com.wily.swat.apmsql.rest.config.Config;
 
@@ -12,7 +13,7 @@ import javax.sql.DataSource;
 
 public class JDBC 
   {
-    private final static String TeiidDriver= "org.teiid.jdbc.TeiidDriver";
+    //private final static String TeiidDriver= "org.teiid.jdbc.TeiidDriver";
 	
 	private static JdbcTemplate jdbcTemplate;
 
@@ -33,13 +34,14 @@ public class JDBC
         String user = Config.getProperty("jdbcuser");
         String pass = Config.getProperty("jdbcpass");
         
-        System.out.println("Read peoperties, user: '" + user + "', url: '" + url + "'");
+        System.out.println("Teiid JDBC connection: User: '" + user + "', url: '" + url + "'");
 
         BasicDataSource ds = new BasicDataSource();
         ds.setUrl(url);
         ds.setUsername(user);
         ds.setPassword(pass);
-        ds.setDriverClassName(TeiidDriver);
+        //ds.setDriverClassName(TeiidDriver.class.getName());
+        ds.setDriver(TeiidDriver.getInstance());
 
         return ds;
       }
