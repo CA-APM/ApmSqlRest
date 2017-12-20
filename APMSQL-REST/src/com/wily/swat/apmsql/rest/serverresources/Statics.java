@@ -96,12 +96,18 @@ public class Statics
       return new JsonRepresentation(object);
     }
   
-  public static void main(String args[]) 
+  @SuppressWarnings("unchecked")
+  private static void setLogging(Level logLevel) 
     {
-	  LogManager.getRootLogger().setLevel(Level.DEBUG);
+	  LogManager.getRootLogger().setLevel(logLevel);
 	  Enumeration<Logger> loggers = LogManager.getCurrentLoggers();
 	  while (loggers.hasMoreElements()) 
-	    loggers.nextElement().setLevel(Level.DEBUG);
+	    loggers.nextElement().setLevel(logLevel);
+    }
+  
+  public static void main(String args[]) 
+    {
+	  setLogging(Level.DEBUG);
 	
 	  List<JSONObject> list;
 	  try 

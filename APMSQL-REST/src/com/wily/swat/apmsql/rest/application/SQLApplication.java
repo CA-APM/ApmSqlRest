@@ -2,13 +2,10 @@ package com.wily.swat.apmsql.rest.application;
 
 import org.restlet.Application;
 import org.restlet.Restlet;
-import org.restlet.engine.application.CorsFilter;
 import org.restlet.routing.Router;
 
 import com.wily.swat.apmsql.rest.serverresources.QueryResource;
 import com.wily.swat.apmsql.rest.serverresources.TransactionsResponseTimesResource;
-
-import java.util.HashSet;
 
 public class SQLApplication extends Application 
   {
