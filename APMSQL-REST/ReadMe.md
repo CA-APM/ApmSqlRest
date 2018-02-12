@@ -161,7 +161,9 @@ If you wish to contribute to this or any other project, please refer to [easy in
 
 	Version	| Author 					| Comment
 	---------|---------------------|--------
-	1.1 		| Henrik Nissen Ravn 	| First published version of the extension.
+	1.0.3 		| Henrik Nissen Ravn 	| First published version of the extension.
+	1.0.2 		| Henrik Nissen Ravn 	| Expanded a bit.
+	1.0.3 		| Henrik Nissen Ravn 	| Simplified a bit. Public repository.
 
 
 
