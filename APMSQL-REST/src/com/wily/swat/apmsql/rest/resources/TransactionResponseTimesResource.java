@@ -1,18 +1,19 @@
-package com.wily.swat.apmsql.rest.serverresources;
+package com.wily.swat.apmsql.rest.resources;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.restlet.representation.Representation;
-import org.restlet.resource.Get;
 import org.restlet.resource.Post;
-import org.restlet.resource.ServerResource;
 import java.io.IOException;
 
-public class TransactionsResponseTimesResource extends ServerResource implements JSONTransformerIface
+import com.wily.swat.apmsql.rest.jdbc.*;
+
+public class TransactionResponseTimesResource extends JsonRestResource 
   {
 	private final static String MINUTES= "Minutes";
 	private final static String MinutesMarker= "{" + MINUTES + "}";
 	private final static String NowMarker = "{Now}";
+	private final static String TransactionName= "transactionName";
 		
 	private final static String SqlTemplate=
 	  "SELECT " + 
@@ -32,15 +33,8 @@ public class TransactionsResponseTimesResource extends ServerResource implements
 	  "AND metric_attribute IN ('Average Response Time (ms)', 'Total Transactions Per Interval', 'Total Defects Per Interval') " +
 	  "GROUP BY REPLACE(REPLACE(Replace(Substring(metric_path, LOCATE('|Business Transactions|', metric_path)+23), ':Average Response Time (ms)', ''), ':Total Transactions Per Interval', ''), ':Total Defects Per Interval', ''), metric_attribute, FORMATTIMESTAMP(ts, 'YYYY-MM-dd HH:mm') " + 
 	  "ORDER BY Type, Transaction, Location, Metric, TimeStamp_Minute ";
-	
-    @Get
-    public String help() 
-      { return "Use Post for your queries to this endpoint"; }
-
-    @Post
-    public Representation processQuery(Representation entity) throws IOException 
-      { return Statics.ProcessJSON(entity, (JSONTransformerIface)this); }
-    
+	 
+    @Override
     public String jsonToSql(JSONObject jsonObject) throws JSONException
       {
     	if(!jsonObject.has(MINUTES)) 
@@ -52,7 +46,11 @@ public class TransactionsResponseTimesResource extends ServerResource implements
     	
     	if (minutes>30)
     	  throw new JSONException("Minutes value must not exceed 30");
- 
+    	
+    	String transactionName= getAttribute(TransactionName);
+    	
+    	
+    	
 	    return SqlTemplate.replace(MinutesMarker, (new Integer(minutes)).toString()).replace(NowMarker, now);
       }
 }

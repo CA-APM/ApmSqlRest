@@ -1,7 +1,5 @@
 package com.wily.swat.apmsql.rest.bootstrap;
 
-import java.util.logging.Level;
-
 import org.restlet.Component;
 import org.restlet.Context;
 import org.restlet.Server;
@@ -14,9 +12,10 @@ public class Bootstrap
   {
     public static void main(String args[]) 
       {
-        Component component = new Component();
-        component.getLogService().setLoggerName("apmsql-rest.log");
-        component.getLogger().setLevel(Level.INFO);
+    	// Jetty default logging
+	    System.setProperty("org.eclipse.jetty.util.log.class", "org.eclipse.jetty.util.log.JavaUtilLog");
+	    	
+    	Component component = new Component();
         component.getDefaultHost().attach("", new SQLApplication());
 
         try

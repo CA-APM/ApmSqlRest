@@ -1,4 +1,4 @@
-package com.wily.swat.apmsql.rest.serverresources;
+package com.wily.swat.apmsql.rest.resources;
 
 import org.json.JSONException;
 import org.json.JSONObject;
