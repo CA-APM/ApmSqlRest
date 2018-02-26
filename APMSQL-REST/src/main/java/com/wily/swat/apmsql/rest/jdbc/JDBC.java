@@ -1,14 +1,20 @@
 package com.wily.swat.apmsql.rest.jdbc;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
+
 import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+
 import org.teiid.jdbc.TeiidDriver;
 
 import com.wily.swat.apmsql.rest.config.Config;
@@ -20,13 +26,12 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.sql.DataSource;
 
 public class JDBC 
   {
-	private final static Logger LOGGER = Logger.getLogger(JDBC.class.getName());
+	private static final Logger log = LogManager.getLogger(JDBC.class);
 	
 	private static JdbcTemplate jdbcTemplate;
 
@@ -47,7 +52,7 @@ public class JDBC
         String user = Config.getProperty("jdbcuser");
         String pass = Config.getProperty("jdbcpass");
         
-        LOGGER.info("Teiid JDBC connection: User: '" + user + "', url: '" + url + "'");
+        log.info("Teiid JDBC connection: User: '" + user + "', url: '" + url + "'");
 
         BasicDataSource ds = new BasicDataSource();
         ds.setUrl(url);
