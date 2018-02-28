@@ -149,4 +149,3 @@ Version	| Author				| Comment
 1.0.1	| Henrik Nissen Ravn 	| First published version of the extension.
 1.0.2	| Henrik Nissen Ravn 	| Expanded a bit.
 1.0.3	| Henrik Nissen Ravn 	| Simplified a bit. Public repository.
-1.0.4	| Henrik Nissen Ravn	| Unified Log4J2 logging with all logger async.
