@@ -52,31 +52,31 @@ public class Logging
       {
 		System.setProperty("log4j.configurationFile", "." + logConfigFileName);
 		
-//		File configFile= new File("." + logConfigFileName); // prepended "." needed for file system file
-//    	if (configFile.exists() && configFile.isFile())
-//    	  {
-//    		try 
-//    		  { 
-//    			InputStream configStream= new FileInputStream(configFile);
-//    			getLogger().info("Using logging configuration for uniform Log4J2 logging from file: {}", getCanonicalPath(configFile));
-//    			
-//    			doConfigure(configStream);    		
-//    			return;
-//    		  } 
-//    		catch (IOException ioe) 
-//    		  { getLogger().error("Failed to load Log4J logging configuration from file: {}", logConfigFileName, ioe); }
-//    	  }
-//    	
-//    	// If file configuration fails fall back to in-jar configuration
-//    	System.setProperty("log4j.configurationFile", logConfigFileName);
-//		try
-//		  {  
-//			InputStream configStream= Logging.class.getResourceAsStream(logConfigFileName);
-//			getLogger().info("Using logging configuration for uniform Log4J2 logging from jar: {}", getCanonicalPath(configFile));
-//			doConfigure(configStream);			
-//		  }
-//		catch (IOException ioe)	    
-//	      { getLogger().error("Failed to load Log4J logging configuration from jar: {}", logConfigFileName, ioe); }
+		File configFile= new File("." + logConfigFileName); // prepended "." needed for file system file
+    	if (configFile.exists() && configFile.isFile())
+    	  {
+    		try 
+    		  { 
+    			InputStream configStream= new FileInputStream(configFile);
+    			getLogger().info("Using logging configuration for uniform Log4J2 logging from file: {}", getCanonicalPath(configFile));
+    			
+    			doConfigure(configStream);    		
+    			return;
+    		  } 
+    		catch (IOException ioe) 
+    		  { getLogger().error("Failed to load Log4J logging configuration from file: {}", logConfigFileName, ioe); }
+    	  }
+    	
+    	// If file configuration fails fall back to in-jar configuration
+    	System.setProperty("log4j.configurationFile", logConfigFileName);
+		try
+		  {  
+			InputStream configStream= Logging.class.getResourceAsStream(logConfigFileName);
+			getLogger().info("Using logging configuration for uniform Log4J2 logging from jar: {}", getCanonicalPath(configFile));
+			doConfigure(configStream);			
+		  }
+		catch (IOException ioe)	    
+	      { getLogger().error("Failed to load Log4J logging configuration from jar: {}", logConfigFileName, ioe); }
 		 
       }
         
